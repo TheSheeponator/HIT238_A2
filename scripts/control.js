@@ -10,6 +10,7 @@ function resetData() {
     // Resets the displayed data on edit. Called by Manual and Auto button events.
     // Calls the same function as the image, to 'refresh' the data.
     updateStatusData();
+    mapClick(CurrentSelection);
 }
 
 function setEditButton(Value) {
@@ -329,28 +330,33 @@ $('#editForm').on('submit', (e) => {
     }
     //Preps and sends the data to the service worker.
     var msg = {
-        'post_data': postdata
+        'post_data': {
+            loc: CurrentSelection,
+            staTime: startVal,
+            finTime: finishVal,
+            delay: delayVal
+        }
     }
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
 
-        start = msg.post_data.staTime.split(':');
-        finish = msg.post_data.finTime.split(':');
+        PDstart = msg.post_data.staTime.split(':');
+        PDfinish = msg.post_data.finTime.split(':');
         
-        if (start[0] > 12) {
-            start[0] = Number(start[0]) - 12;
+        if (PDstart[0] > 12) {
+            PDstart[0] = Number(PDstart[0]) - 12;
             startMeridian = 'pm';
         } else {
             startMeridian = 'am';
         }
 
-        if (finish[0] > 12) {
-            finish[0] = Number(finish[0]) - 12;
+        if (PDfinish[0] > 12) {
+            PDfinish[0] = Number(PDfinish[0]) - 12;
             finishMeridian = 'pm';
         } else {
             finishMeridian = 'am';
         }
-        msg.post_data.staTime = start.join(':') + ' ' + startMeridian;
-        msg.post_data.finTime = finish.join(':') + ' ' + finishMeridian;
+        msg.post_data.staTime = PDstart.join(':') + ' ' + startMeridian;
+        msg.post_data.finTime = PDfinish.join(':') + ' ' + finishMeridian;
 
         navigator.serviceWorker.controller.postMessage(msg);
     } else { console.log("Service Worker Control is not instantiated!"); }
@@ -385,7 +391,7 @@ $('#editForm').on('submit', (e) => {
                     // invalid can also have detailed info on error.
                     if (response.error != undefined && response.loc != undefined && response.col != undefined) {
                         $('.popupContainer').hide();
-                        displayMessage(0, `Invalid Request, for '${response.error.col}'. Please try again.`);
+                        displayMessage(0, `Invalid Request, for '${response.col}'. Please try again.`);
                     } else {
                         $('.popupContainer').hide();
                         displayMessage(0, 'Invalid Request, your change was not saved. Please try again.');
