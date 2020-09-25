@@ -1,0 +1,298 @@
+
+/* -----MOBILE NAVIGATION HEADER----- */
+nav .logo {
+    width: auto;
+    height: 50px;
+    float: left;
+    margin-top: -5px;
+}
+nav .navbar {
+    background-color: #00aa88;
+    overflow: hidden;
+    min-height: 40px;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* background-color: #333; */
+}
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 5px;
+    text-decoration: none;
+    font-variant-caps: normal;
+}
+nav li a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+nav .logout {
+    float: right;
+    padding: 14px 16px;
+}
+
+nav .menu-btn {
+    float: right;
+    padding: 7.5px 10.5px;
+}
+.menu-btn div {
+    position: absolute;
+    left: 100%;
+    top: 64%;
+    padding-right: 8px;
+    margin-top: -0.50em;
+    line-height: 1.2;
+    font-size: 18px;
+    font-weight: 200;
+    vertical-align: middle;
+    z-index: 99;
+}
+.menu-btn span {
+    display: block;
+    width: 19px;
+    height: 3px;
+    margin: 4px 0;
+    background: #c5c5c5;
+    z-index: 99;
+}
+.responsive-menu{
+    max-height: 0;
+    /* background: #999999; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: all .25s;
+    margin: 0px auto;
+}
+.expand {
+    max-height: 300px;
+}
+
+
+/* -----MAIN CONTENT----- */
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    margin-top: 8px;
+}
+main {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#controlImg {
+    height: 80vh;
+}
+/* -----MAIN CONTROL TABLE----- */
+table.controlTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  	border-collapse: collapse;
+    text-align: center;
+    max-width: 100%;
+    overflow-wrap: normal;
+}
+table.controlTable th {
+    padding: 5px 1px;
+    color: white;
+    border: 1px solid black;
+}
+table.controlTable td {
+    border: 1px solid rgb(0, 0, 0);
+    color: black;
+}
+table.controlTable tr.updateTime {
+    border-style: none;
+    border: 0px solid #000000;
+}
+table.controlTable tr.messageBar td {
+    border: 0px solid #000000;
+    text-align: right;
+    font-size: 0.9em;
+    color: gray;
+}
+table.controlTable tr.messageBar td#updateTime {
+    text-align: right;
+}
+table.controlTable tr.messageBar td#errorMsg {
+    text-align: left;
+    color: red;
+    font-weight: bold;
+}
+
+/* -----EDIT Popup & table----- */
+/* Adapted from example at 'https://html-online.com/articles/simple-popup-box/' */
+.popupContainer {
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.popupBackground {
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10001;
+}
+.popupContainer .helper {
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.popupContainer > .popupBody {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    width: 70%;
+    max-width: 335px;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+    z-index:10002;
+}
+.popupContainer .popupBody table {
+    margin: auto;
+}
+.popupContainer .popupBody input {
+    min-width: 50px;
+    width: 100%;
+}
+.popupContainer .popupBody table p {
+    color: #555;
+    font-size: .8em;
+}
+
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
+}
+.editWindowButton {
+    cursor: pointer;
+    font-size: 1em;
+    margin: 10px 0;
+    display: inline-block;
+}
+
+div.editResultMessage {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    max-width: 600px;
+    padding: 10px;
+    color: black;
+    text-align: center;
+}
+
+
+/* -----ERROR MESSAGES----- */
+#error {
+    color: #8b0000;
+    background-color: #ff8989;
+    border: 2px solid black;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    display: inline-block;
+    align-items: center;
+    height: auto;
+    width: 90%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#editsuccess {
+    color: #000000;
+    background-color: rgb(0, 252, 0);
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    justify-content: center;   
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    width: 90%;
+    border: 2px solid black;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#editerror {
+    color: #000000;
+    background-color: rgb(255, 91, 91);
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    justify-content: center;   
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    width: 90%;
+    border: 2px solid black;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media screen and (max-width: 500px) {
+    .controlTable {
+        font-size: 13px;
+    }
+    .controlTable td {
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 550px) {
+    .controlTable td {
+        padding: 5px;
+    }
+    .controlTable th {
+        padding: 5px;
+    }
+}
+@media screen and (max-width: 300px) {
+    .controlTable {
+        font-size: 11px;
+    }
+    .controlTable td {
+        font-size: 10px;
+    }
+}
