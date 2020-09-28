@@ -379,11 +379,7 @@ $('#editForm').on('submit', (e) => {
                     $('.popupContainer').hide();
                     displayMessage(1, 'Successfully Updated Database!');
 
-                    // PostMessage to serviceWorker to update the Status IDB with the new data if it can.
-                    if ('serviceWorker' in navigator&& navigator.serviceWorker.controller) {
-                        navigator.serviceWorker.controller.postMessage({'reloadStatus': true});
-                    } else { console.log("Service Worker Control is not instantiated!"); }
-
+                    updateStatusData();
                     // update the displayed information.
                     mapClick(CurrentSelection, false);
 

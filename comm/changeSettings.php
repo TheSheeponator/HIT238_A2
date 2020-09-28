@@ -22,7 +22,7 @@ if (isset($_JSONdata['staTime']) && isset($_JSONdata['finTime']) && isset($_JSON
     $end = $_JSONdata['finTime'];
 
         
-    if (!preg_match("/^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/",$start) && !preg_match("/^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/",$end)) {                
+    if (!preg_match("/^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/",$start) || !preg_match("/^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/",$end)) {
         $error_invData = '';
         if (!preg_match("/^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/",$start)) {
             $error_invData .= 's1';
@@ -49,12 +49,16 @@ if (isset($_JSONdata['staTime']) && isset($_JSONdata['finTime']) && isset($_JSON
     $end1q = $end;
     $idq = $loc;
 
-    mysqli_stmt_execute($stmt);
-
+    $status = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    echo json_encode(array("success" => "True"));
+    if ($status) {
+        echo json_encode(array("success" => "True"));
+    } else {
+        echo json_encode(array("error" => "internal"));
+    }
     exit();
+
 } else {
     echo json_encode(array("error" => "invalid", "errorData" => $_JSONdata));
     exit();
