@@ -14,10 +14,10 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     exit();
 }
 // Check if request is not ajax.
-if($_SERVER['REQUEST_METHOD'] == 'GET') {
-    header("Location: /errordocs/err003");
-    exit();
-}
+// if($_SERVER['REQUEST_METHOD'] === 'GET') {
+//     header("Location: /errordocs/err003");
+//     exit();
+// }
 
 require './checkperm.php';
 checkPerm_ajax();
@@ -41,7 +41,7 @@ require './dbh.inc.php';
 $sql = 'SELECT `uidUsers`,`emailUsers`,`Perms` FROM `sysusers`';
 $stmt = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
-    redirect("Location: ./users?error=sqlerror");
+    echo json_encode(array("error" => "internal"));
 }
 else {
     $result = mysqli_query($conn, $sql) or Die(mysqli_error($conn));

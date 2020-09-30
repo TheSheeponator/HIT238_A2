@@ -14,10 +14,10 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     exit();
 }
 // Check if request is not ajax.
-if($_SERVER['REQUEST_METHOD'] == 'GET') {
-    header("Location: /errordocs/err003");
-    exit();
-}
+// if($_SERVER['REQUEST_METHOD'] == 'GET') {
+//     header("Location: /errordocs/err003");
+//     exit();
+// }
 
 require './checkperm.php';
 checkPerm_ajax();
@@ -25,13 +25,14 @@ checkPerm_ajax();
 // Reset session timeout.
 $_SESSION['LAST_ACTIVITY'] = time();
 
-if (isset($_POST['adduser-submit'])) { 
+$_JSONdata = json_decode(file_get_contents('php://input'), true);
+if (isset($_JSONdata['adduser'])) { 
     require 'dbh.inc.php';
 
-    $userName = $_POST['newuid'];
-    $email = $_POST['newmail'];
-    $pwd = $_POST['newpwd'];
-    $PasswordRepeat = $_POST['newpwd-repeat'];
+    $userName = $_JSONdata['newuid'];
+    $email = $_JSONdata['newmail'];
+    $pwd = $_JSONdata['newpwd'];
+    $PasswordRepeat = $_JSONdata['newpwd-repeat'];
 
     if (empty($userName) || empty($email) || empty($pwd) || empty($PasswordRepeat)) {
         echo json_encode(array("error" => "emptyFields"));
@@ -76,9 +77,9 @@ if (isset($_POST['adduser-submit'])) {
                     exit();
                 }
                 else {
-                    $hasedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+                    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($stmt, "sss", $userName, $email, $hasedPwd);
+                    mysqli_stmt_bind_param($stmt, "sss", $userName, $email, $hashedPwd);
                     mysqli_stmt_execute($stmt);
                     echo json_encode(array("success" => true));
                     exit();
@@ -88,7 +89,7 @@ if (isset($_POST['adduser-submit'])) {
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
-  } else {
-    echo header("", true, 403);
-    exit();
-  }
+} else {
+echo json_encode(array("error" => "invalidRequest"));
+exit();
+}

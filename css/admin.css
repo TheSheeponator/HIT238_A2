@@ -65,3 +65,17 @@ table.Utable tbody tr td:nth-child(2) {
     margin: 10px 0;
     display: inline-block;
 }
+#addUserFormErrorMsg {
+    align-items: center;
+}
+.AUerror {
+    color: black;
+    background-color: #ff8989a4;
+    border: 1px solid black;
+    font-size: 1em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    align-items: center;
+    max-width: 90%;
+    margin: auto;
+}

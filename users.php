@@ -42,26 +42,27 @@
             <span class="helper"></span>
             <div class="popupBody">
                 <div class="popupCloseButton">&times;</div>
-                <form action="includes/adduser.inc.php" method="POST">
+                <form id="addUserForm">
                 <h3>Add User</h3>
                     <table>
                         <tbody>
                           <tr>
                             <td><label for="newuid">Username: </label></td>
-                            <td><input type="text" name="newuid" id="newuid" placeholder="Username"></td>
+                            <td><input type="text" name="newuid" id="newuid" placeholder="Username" autocomplete="username"></td>
                           </tr>
                           <tr>
                             <td><label for="newmail">E-mail: </label></td>
-                            <td><input type="text" name="newmail" id="newmail" placeholder="E-mail"></td>
+                            <td><input type="text" name="newmail" id="newmail" placeholder="E-mail" autocomplete="email"></td>
                           </tr>
                           <tr>
                             <td><label for="newpwd">Password: </label></td>
-                            <td><input type="password" name="newpwd" id="newpwd" placeholder="Password"></td>
+                            <td><input type="password" name="newpwd" id="newpwd" placeholder="Password" autocomplete="new-password"></td>
                           </tr>
                           <tr>
                             <td></td>
-                            <td><input type="password" name="newpwd-repeat" id="newpwd-repeat" placeholder="Repeat Password"></td>
+                            <td><input type="password" name="newpwd-repeat" id="newpwd-repeat" placeholder="Repeat Password" autocomplete="new-password"></td>
                           </tr>
+                          <tr id="addUserFormErrorMsg"></tr>
                           <tr>
                             <td colspan="2"><button type="submit" name="adduser-submit">Add</button></td>
                           </tr>
