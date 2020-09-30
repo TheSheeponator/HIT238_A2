@@ -3,13 +3,16 @@ session_start();
 require "../Redirect.php";
 
 if (!isset($_SESSION['userId']) && basename($_SERVER['SCRIPT_FILENAME'], ".php") != "index") {
-    redirectUp("index");
+    echo json_encode(array("redirect" => "//index?error=sessionexpired"));
+    exit();
 }
 
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
     session_unset();
     session_destroy();
-    redirectUp("index?error=sessionexpired");
+
+    echo json_encode(array("redirect" => "//index?error=sessionexpired"));
+    exit();
 }
 $_SESSION['LAST_ACTIVITY'] = time();
 

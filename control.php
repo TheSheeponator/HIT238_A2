@@ -3,7 +3,6 @@
 ?>
     
     <main style="flex-direction: column;">
-        <script src="./scripts/jquery.js"></script>
         <script src="./scripts/jquery.imagemapster.min.js"></script>
         <img id="controlImg" src="./img/House Plan.png" alt="Intractable house plan" name="nav" usemap="#nav">
         <map name="nav" id="nav">

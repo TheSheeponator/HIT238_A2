@@ -1,6 +1,6 @@
 <?php
 
-    // Error 001 is for SQL related errors. Normaly issued by 'db.inc.php' & 'sdb.inc.php'.
+    // Error 001 is for SQL related errors. Normaly issued by 'db.inc.php' & 'sdb.inc.php', and includes scripts.
 
 ?>
 <!DOCTYPE html>

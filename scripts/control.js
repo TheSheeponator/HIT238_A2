@@ -380,6 +380,9 @@ $('#editForm').on('submit', (e) => {
                     $('.popupContainer').hide();
                     displayMessage(2, 'Request could not be sent right now and will be sent later when reconnected to the internet.');
                     resetData();
+                } else if (response.redirect != undefined) {
+                    $('.popupContainer').hide();
+                    displayMessage(2, 'Session token is invalid, Please log in again <a href="//">here</a>.');
                 } else {
                     $('.popupContainer').hide();
                     displayMessage(0, 'An unknown error occurred, your change was not saved. Please try again later.');
