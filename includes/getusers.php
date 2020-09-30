@@ -1,4 +1,29 @@
 <?php
+session_start();
+// Check if there is a valid session with this connection.
+if (!isset($_SESSION['userId'])) {
+    echo json_encode(array("redirect" => "//index"));
+    exit();
+}
+// Check if the session has expired.
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+    session_unset();
+    session_destroy();
+    
+    echo json_encode(array("redirect" => "//index?error=sessionexpired"));
+    exit();
+}
+// Check if request is not ajax.
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
+    header("Location: /errordocs/err003");
+    exit();
+}
+
+require './checkperm.php';
+checkPerm_ajax();
+
+// Reset session timeout.
+$_SESSION['LAST_ACTIVITY'] = time();
 
 class wrapper {
     public $userData;

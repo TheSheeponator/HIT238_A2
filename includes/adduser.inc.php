@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Check if there is a valid session with this connection.
 if (!isset($_SESSION['userId'])) {
     echo json_encode(array("redirect" => "//index"));
@@ -11,20 +12,21 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     
     echo json_encode(array("redirect" => "//index?error=sessionexpired"));
     exit();
-}   
+}
 // Check if request is not ajax.
-if(empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
     header("Location: /errordocs/err003");
     exit();
 }
+
+require './checkperm.php';
+checkPerm_ajax();
+
 // Reset session timeout.
 $_SESSION['LAST_ACTIVITY'] = time();
 
 if (isset($_POST['adduser-submit'])) { 
     require 'dbh.inc.php';
-
-    session_start();
-    $_SESSION['LAST_ACTIVITY'] = time();
 
     $userName = $_POST['newuid'];
     $email = $_POST['newmail'];
