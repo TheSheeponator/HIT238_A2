@@ -14,6 +14,25 @@
   $_SESSION['LAST_ACTIVITY'] = time();
 
   require "./includes/dbh.inc.php";
+  $userPerm = 0;
+
+  $sql = "SELECT uidusers FROM sysusers WHERE uidUsers=? AND perms=1";
+  $stmt = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+      require "./errordocs/err002.php";
+      exit();
+  }
+  else {
+    $userName = $_SESSION['userUid'];
+    mysqli_stmt_bind_param($stmt, "s", $userName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $resultCheck = mysqli_stmt_num_rows($stmt);
+    if ($resultCheck > 0) {
+      $userPerm = 1;
+    }
+  }
+  mysqli_stmt_close($stmt);
 
 ?>
 
@@ -23,6 +42,8 @@
       <meta charset="utf-8">
       <meta name=viewport content="width=device-width, initial-scale=1">
       <link rel="stylesheet" type="text/css" href="./css/style.css" />
+      <script src="/scripts/jquery.js"></script>
+      <script src="/scripts/Nav.js"></script>
 
       <link rel="manifest" href="manifest.json">
       <meta name="theme-color" content="#009578">
@@ -43,9 +64,12 @@
             </div>
             <div class="responsive-menu">
               <ul>
-                <li><a href="">Control</a></li>
+                <li><a href="/control">Control</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="#" id="logoutButton">Logout</a>
+                <?php 
+                  if ($userPerm == 1) echo '<li><a href="./users">User List</a></li>';
+                ?>
                 </li>
               </ul>
             </div>             

@@ -1,0 +1,67 @@
+/* ----------SIGNUP---------- */
+.AU button {
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+}
+.AU {
+    text-align: center;
+}
+.AU input {
+    /* display: block; */
+    font-size: 15px;
+    margin: 5px 0px;
+}
+#AUerror {
+    text-align: center;
+    color: #8b0000;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline;
+}
+#AUsuccess {
+    text-align: center;
+    color: #00c932;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline;
+}
+/* ----------USERS---------- */
+table.Utable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  	border-collapse: collapse;
+    max-width: 100%;
+    text-align: center;
+}
+table.Utable th {
+    padding: 5px 2px;
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid black;
+}
+table.Utable td {
+    border: 1px solid black;
+    padding: 5px 2px;
+    color: black;
+}
+table.Utable tr:nth-child(even){background-color: #ffffff;}
+
+table.Utable tr:nth-child(odd){background-color: #e2e2e2;}
+
+table.Utable tr:hover {background-color: rgb(177, 177, 177);}
+
+table.Utable td:nth-child(1) {
+    text-align: center;
+}
+table.Utable tbody tr td:nth-child(2) {
+    overflow: hidden;
+}
+
+
+.addUserWindowButton {
+    cursor: pointer;
+    font-size: 1em;
+    margin: 10px 0;
+    display: inline-block;
+}
