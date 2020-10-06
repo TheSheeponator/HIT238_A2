@@ -11,10 +11,10 @@ $(document).ready(function () {
             if (data.sessionValid != undefined && data.redirect != undefined && data.disError != undefined && data.extraNav != undefined) {
                 console.log(data);
                 
-                if (data.sessionValid != true) {
+                if (data.sessionValid == false) {
                     window.location = data.redirect;
                 } else if (data.disError === 'err002') {
-                    document.getElementsByTagName('main').innerHTML = fetch('./errdocs/err002');
+                    document.getElementsByTagName('main').innerHTML = fetch('/HIT238_A2/errdocs/err002');
                     return;
                 }
                 

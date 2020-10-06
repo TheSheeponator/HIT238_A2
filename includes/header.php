@@ -35,13 +35,13 @@ class NavButton {
 
   if (!isset($_SESSION['userId'])) {
     $headerContent->sessionValid = false;
-    $headerContent->redirect = '/';
+    $headerContent->redirect = '/HIT238_A2/';
   } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
     session_unset();
     session_destroy();
 
     $headerContent->sessionValid = false;
-    $headerContent->redirect = '/index?error=sessionexpired';
+    $headerContent->redirect = '/HIT238_A2/index?error=sessionexpired';
   } else {
     $_SESSION['LAST_ACTIVITY'] = time();
 
@@ -69,11 +69,11 @@ class NavButton {
     if ($userPerm === 1) {
       $userPage = new NavButton();
       $userPage->text = 'User List';
-      $userPage->destination = './users';
+      $userPage->destination = '/HIT238_A2/users';
       array_push($headerContent->extraNav, $userPage);
     }
 
     $headerContent->sessionValid = true;
-    $headerContent->redirect = '/control';
+    $headerContent->redirect = '/HIT238_A2/control';
   }
   echo json_encode($headerContent);
