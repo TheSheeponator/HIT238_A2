@@ -16,7 +16,10 @@ function getUserData() {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.userData != undefined) {
+            if (data.error != undefined && (data.error === 'invCredentials' || data.error === 'internal')) {
+                window.location = '/errordocs/err403';
+            }
+            else if (data.userData != undefined) {
                 data.userData.forEach(user => {
                     var newRow = table.insertRow();
                     var colName = newRow.insertCell();
@@ -29,10 +32,8 @@ function getUserData() {
                     colPermLevel.innerHTML = user.permLevel;
                     colRemove.innerHTML = (user.permLevel == '1' ? '' : `<button onclick="RemoveUser('${user.name}')">Remove</button>`);
                 });
-            } else if (data.invPerm != undefined) {
-                window.location = '/errordocs/err403';
             } else {
-                console.log('[UM] Got no valid response from server when requested Users: ', data)
+                console.log('[UM] Got no valid response from server when requested Users got: ', data)
             }
         })
         .catch(err => console.error(err));
