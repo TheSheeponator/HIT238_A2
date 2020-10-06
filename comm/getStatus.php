@@ -18,7 +18,7 @@ class zoneData {
 /*
   Some code from: https://stackoverflow.com/questions/8719276/cross-origin-request-headerscors-with-php-headers
 */
-header('Access-Control-Allow-Origin: https://thesheeponator.github.io/HIT238_A2/');
+header('Access-Control-Allow-Origin: https://thesheeponator.github.io');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 86400');    // cache for 1 day
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
