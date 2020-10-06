@@ -57,7 +57,7 @@ $('#autoFormButton').click(function(evt) {
     var postdata = {
         
     }
-    $.post('./comm/command', {
+    $.post('https://320298.spinetail.cdu.edu.au/API/comm/command', {
         loc: CurrentSelection,
         auto: true
     }, (response) => {
@@ -79,7 +79,7 @@ $('#manualON').click(function(evt) {
     setAutoButton(0);
     setManualButton(0);
 
-    $.post("./comm/command", {
+    $.post("https://320298.spinetail.cdu.edu.au/API/comm/command", {
         loc: CurrentSelection,
         manual: true,
         status: 1 
@@ -101,7 +101,7 @@ $('#manualOFF').click(function(evt) {
     evt.preventDefault(); //Prevent default form submittion
     setAutoButton(0);
     setManualButton(0);
-    $.post("./comm/command", {
+    $.post("https://320298.spinetail.cdu.edu.au/API/comm/command", {
         loc: CurrentSelection,
         manual: true,
         status: 0,
@@ -347,7 +347,7 @@ $('#editForm').on('submit', (e) => {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        url: "comm/changeSettings",
+        url: "https://320298.spinetail.cdu.edu.au/API/comm/changeSettings",
         data: JSON.stringify(postdata),
         success: (response) => {
             // if successful, check if the response is not null.

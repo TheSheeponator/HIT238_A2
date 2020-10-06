@@ -26,7 +26,7 @@
     </main>
 </body>
 <script>
-    fetch('/includes/header', {
+    fetch('https://320298.spinetail.cdu.edu.au/API/header', {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -42,7 +42,7 @@
     $('#loginForm').submit(function(evt) {
         evt.preventDefault(); //Prevent default form submittion
 
-        var posting = $.post('includes/login.inc.php', {
+        var posting = $.post('https://320298.spinetail.cdu.edu.au/API/login.inc.php', {
             uid: $('#uid').val(),
             pwd: $('#pwd').val(),
             loginsubmit: true

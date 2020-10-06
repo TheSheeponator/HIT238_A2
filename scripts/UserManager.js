@@ -10,7 +10,7 @@ class UserData {
 function getUserData() {
     var table = document.getElementById('UserTable').getElementsByTagName('tbody')[0];
     table.innerHTML = '';
-    fetch('/includes/getusers', {
+    fetch('https://320298.spinetail.cdu.edu.au/API/getusers', {
         method: 'GET',
         cache: 'no-cache',
         mode: 'cors',
@@ -19,7 +19,7 @@ function getUserData() {
         .then(response => response.json())
         .then(data => {
             if (data.error != undefined && (data.error === 'invCredentials' || data.error === 'internal')) {
-                window.location = '/errordocs/err403';
+                window.location = 'https://320298.spinetail.cdu.edu.au/API/errordocs/err403';
             }
             else if (data.userData != undefined) {
                 data.userData.forEach(user => {
@@ -42,7 +42,7 @@ function getUserData() {
 }
 
 function RemoveUser(userName) {
-    fetch('./includes/removeUsers.inc', {
+    fetch('https://320298.spinetail.cdu.edu.au/API/removeUsers.inc', {
         method: 'POST',
         cache: 'no-cache',
         mode: 'cors',
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         form = document.getElementById('addUserForm');
 
-        fetch('/includes/addUser.inc', {
+        fetch('https://320298.spinetail.cdu.edu.au/API/addUser.inc', {
             method: 'POST',
             cache: 'no-cache',
             mode: 'cors',

@@ -75,7 +75,7 @@ StatusIDBFuncSet.getData = (key, table = StatusIDBSettings.tables[0].tableName) 
 
 function updateStatusData() {
   return new Promise(resolve => {
-    var requestURL = "comm/getStatus";
+    var requestURL = "https://320298.spinetail.cdu.edu.au/API/comm/getStatus";
     var method = "POST";
     var headers = {
       Accept: "application/json",

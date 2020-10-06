@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    fetch('./includes/header', {
+    fetch('https://320298.spinetail.cdu.edu.au/API/header', {
         method: 'GET',
         credentials: 'include',
         cache: 'no-cache'
@@ -58,6 +58,6 @@ $(document).ready(function () {
     
     $('#logoutButton').click(function(evt){
         // redirect to logout script.
-        window.location = "/includes/logout.inc";
+        window.location = "https://320298.spinetail.cdu.edu.au/API/logout.inc";
     })
 });
