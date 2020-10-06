@@ -14,7 +14,7 @@
             <form id="loginForm" method="POST">
                 <p class="title">LogIn</p>
 
-                <span id="error"><?php if (isset($_GET['error']) && $_GET['error'] == 'sessionexpired') { echo 'Your session has expired.<br>Please re-enter your credentials.'; } ?></span>
+                <span id="error"></span>
                 
                 <input type="text" id="uid" name="mailuid" placeholder="Username/E-mail..." autocomplete="username">
                 <input type="password" id="pwd" name="pwd" placeholder="Password..." autocomplete="current-password">
@@ -28,13 +28,14 @@
 <script>
     fetch('/includes/header', {
         method: 'GET',
+        mode: 'cors',
         credentials: 'include',
         cache: 'no-cache'
     })
         .then(response => response.json())
         .then(data => {
             if (data != undefined && data.sessionValid != undefined && data.redirect != undefined && data.disError != undefined) {
-                if (data.sessionValid = true) { window.location = data.redirect; }
+                if (data.sessionValid == true) { window.location = data.redirect; }
                 else if (data.disError != '') { responseHandler({ 'error': 'internalerror' }); }
             }
         })
@@ -65,5 +66,12 @@
             window.location = data.success;
         }
     };
+    $(document).ready(function () {
+        var queryDict = {}
+        location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+        if (queryDict['error'] != undefined && queryDict.error == 'sessionexpired') {
+            $('#error').html("Your session has expired.<br>Please re-enter your credentials.");
+        }
+    });
 </script>
 </html>

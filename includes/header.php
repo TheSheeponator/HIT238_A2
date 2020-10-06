@@ -17,13 +17,11 @@ class NavButton {
   $headerContent = new Header();
 
   if (!isset($_SESSION['userId'])) {
-    // header("Location: /index");
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/';
   } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
     session_unset();
     session_destroy();
-    // header("Location: /index?error=sessionexpired");
 
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/index?error=sessionexpired';
@@ -36,9 +34,6 @@ class NavButton {
     $sql = "SELECT uidusers FROM sysusers WHERE uidUsers=? AND perms=1";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        // require "./errordocs/err002.php";
-        // exit();
-
         $headerContent->sessionValid = true;
         $headerContent->disError = 'err002';
     }

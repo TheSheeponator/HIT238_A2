@@ -5,7 +5,7 @@
 importScripts('/scripts/StatusIDB.js');
 // set variables.
 var CACHE_TITLE = 'SprinklerSites';
-var CACHE_VERSION = 'v0.0.64';
+var CACHE_VERSION = 'v0.0.65';
 var CACHE_NAME = CACHE_TITLE + '-' + CACHE_VERSION;
 var urlsToCache = [
 
@@ -77,7 +77,10 @@ self.addEventListener('fetch', function(event) {
             } else {
               // No item in the cache matches the request, getting it from the web.
               // console.log(`[SW] Page not found in cache, searching web for: ${event.request.clone().url}`);
-              return fetch(event.request.clone());
+              return fetch(event.request.clone(), {
+                mode: 'cors',
+                credentials: 'include'
+              });
             }
           })
       );
@@ -85,7 +88,10 @@ self.addEventListener('fetch', function(event) {
     // If request is a POST, then most likely a ajax request.
     if (RegExp('^(.*|\/)(\/comm\/command)\/?').test(event.request.clone().url)) {
       event.respondWith(
-        fetch(event.request.clone())
+        fetch(event.request.clone(), {
+          mode: 'cors',
+          credentials: 'include'
+        })
           .then((response) => {
             return response;
           })
@@ -104,7 +110,10 @@ self.addEventListener('fetch', function(event) {
     } else if (RegExp('^(.*|\/)(\/comm\/changeSettings)\/?').test(event.request.clone().url)) {
       // Connection is from/for Edit Times and is to be stored if no connection is made.
       event.respondWith(
-        fetch(event.request.clone())
+        fetch(event.request.clone(), {
+          mode: 'cors',
+          credentials: 'include'
+        })
         .then((response) => {
           return response;
         })
@@ -140,7 +149,10 @@ self.addEventListener('fetch', function(event) {
       )
     } else {
       event.respondWith(
-        fetch(event.request)
+        fetch(event.request, {
+          mode: 'cors',
+          credentials: 'include'
+        })
           .then((response) => { return response; })
           .catch((err) => {
             console.error('[SW] Fetch failed and return error:', err);
@@ -243,7 +255,9 @@ function sendPostToServer() {
         fetch(requestURL, {
           headers: headers,
           method: method,
-          body: payload
+          body: payload,
+          mode: 'cors',
+          credentials: 'include'
         }).then((response) => {
           if (response.status < 400) {
             // fetch was successful, remove it from the IDB.

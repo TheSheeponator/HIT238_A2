@@ -12,7 +12,9 @@ function getUserData() {
     table.innerHTML = '';
     fetch('/includes/getusers', {
         method: 'GET',
-        cache: 'no-cache'
+        cache: 'no-cache',
+        mode: 'cors',
+        credentials: 'include'
     })
         .then(response => response.json())
         .then(data => {
@@ -43,6 +45,8 @@ function RemoveUser(userName) {
     fetch('./includes/removeUsers.inc', {
         method: 'POST',
         cache: 'no-cache',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -87,6 +91,8 @@ $(document).ready(function () {
         fetch('/includes/addUser.inc', {
             method: 'POST',
             cache: 'no-cache',
+            mode: 'cors',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'json',
 
