@@ -16,15 +16,12 @@ $(document).ready(function () {
     .then(data => {
         if (data != undefined) {
             if (data.sessionValid != undefined && data.redirect != undefined && data.disError != undefined && data.extraNav != undefined) {
-                console.log(data);
-                
                 if (data.sessionValid == false) {
                     window.location = data.redirect;
                 } else if (data.disError === 'err002') {
                     document.getElementsByTagName('main').innerHTML = fetch('/HIT238_A2/errdocs/err002');
                     return;
                 }
-                
                 if (data.extraNav.length > 0) {
                     var navUL = document.getElementsByClassName('LinkUL')[0];
                     data.extraNav.forEach(element => {
