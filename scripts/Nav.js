@@ -1,7 +1,7 @@
 $(document).ready(function () {
     
     fetch('https://320298.spinetail.cdu.edu.au/API/header', {
-        method: 'GET',
+        method: 'POST',
         mode: 'cors',
         credentials: 'include',
         cache: 'no-cache',
