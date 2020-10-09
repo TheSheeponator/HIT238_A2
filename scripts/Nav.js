@@ -8,7 +8,9 @@ $(document).ready(function () {
         headers: {
             'Content-Type': 'application/json',
           },
-        body: JSON.stringify(sessionStorage.getItem('apiID')),
+        body: JSON.stringify({ 
+            apiID: sessionStorage.getItem('apiID')
+        }),
     })
     .then(response => response.json())
     .then(data => {
