@@ -74,7 +74,7 @@ if (isset($_POST['loc'])){
 
     } else if (isset($_POST['manual']) && isset($_POST['status']) && ctype_digit($_POST['status']) && ( (int)$_POST['status'] == 0 || (int)$_POST['status'] == 1 )) {
         
-        require '../includes/sdbh.inc.php';
+        require '../sdbh.inc.php';
 
         $sql = 'UPDATE times SET status=? WHERE id=?';
         $stmt = mysqli_stmt_init($sconn);
