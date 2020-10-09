@@ -15,31 +15,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
   exit();
 }
-ini_set('session.cookie_samesite', 'None');
-session_start();
-// Check if there is a valid session with this connection.
-if (!isset($_SESSION['userId'])) {
-    echo json_encode(array("redirect" => "//index"));
-    exit();
-}
-// Check if the session has expired.
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
-    session_unset();
-    session_destroy();
+// ini_set('session.cookie_samesite', 'None');
+// session_start();
+// // Check if there is a valid session with this connection.
+// if (!isset($_SESSION['userId'])) {
+//     echo json_encode(array("redirect" => "//index"));
+//     exit();
+// }
+// // Check if the session has expired.
+// if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+//     session_unset();
+//     session_destroy();
     
-    echo json_encode(array("redirect" => "//index?error=sessionexpired"));
-    exit();
-}   
+//     echo json_encode(array("redirect" => "//index?error=sessionexpired"));
+//     exit();
+// }   
 // Check if request is not ajax.
 // if($_SERVER['REQUEST_METHOD'] == 'GET') {
 //     header("Location: /errordocs/err003");
 //     exit();
 // };
 
-require './checkperm.php';
-checkPerm_ajax();
+// require './checkperm.php';
+// checkPerm_ajax();
 
+require './session.php';
+require './dbh.inc.php';
 $_JSONdata = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($_JSONdata['apiID'])) {
+    echo json_encode(array("error" => "invCredentials"));
+    exit();
+} else if (checkSession($conn, $_JSONdata['apiID'])) {
+    echo json_encode(array("error" => "invCredentials"));
+    exit();
+}
+
 if (isset($_JSONdata['user'])) {
     require "./dbh.inc.php";
 

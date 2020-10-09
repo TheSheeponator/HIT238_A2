@@ -11,10 +11,16 @@ function getUserData() {
     var table = document.getElementById('UserTable').getElementsByTagName('tbody')[0];
     table.innerHTML = '';
     fetch('https://320298.spinetail.cdu.edu.au/API/getusers', {
-        method: 'GET',
+        method: 'POST',
         cache: 'no-cache',
         mode: 'cors',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({ 
+            apiID: sessionStorage.getItem('apiID')
+        })
     })
         .then(response => response.json())
         .then(data => {
@@ -48,9 +54,12 @@ function RemoveUser(userName) {
         mode: 'cors',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user: userName })
+        body: JSON.stringify({
+            user: userName,
+            apiID: sessionStorage.getItem('apiID')
+        })
     })
         .then(response => response.json())
         .then(data => {
@@ -98,6 +107,7 @@ $(document).ready(function () {
 
             },
             body: JSON.stringify({
+                apiID: sessionStorage.getItem('apiID'),
                 adduser: true,
                 newuid: form[0].value,
                 newmail: form[1].value,

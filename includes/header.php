@@ -40,7 +40,7 @@ class NavButton {
   if (!isset($_JSONdata['apiID'])) {
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/HIT238_A2/';
-  } else if (checkSession($conn, $apiID)) {//(!isset($_SESSION['userId'])) {
+  } else if (checkSession($conn, $_JSONdata['apiID'])) {//(!isset($_SESSION['userId'])) {
   //   $headerContent->sessionValid = false;
   //   $headerContent->redirect = '/HIT238_A2/';
   // } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
