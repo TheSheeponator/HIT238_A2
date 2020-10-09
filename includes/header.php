@@ -17,7 +17,6 @@ class NavButton {
   Some code from: https://stackoverflow.com/questions/8719276/cross-origin-request-headerscors-with-php-headers
 */
   header('Access-Control-Allow-Origin: https://thesheeponator.github.io');
-  header('Access-Control-Allow-Origin: http://localhost');
   header('Access-Control-Allow-Credentials: true');
   header('Access-Control-Max-Age: 86400');    // cache for 1 day
   if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -41,7 +40,7 @@ class NavButton {
   if (!isset($_JSONdata['apiID'])) {
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/HIT238_A2/';
-  } else if (!checkSession($conn, $apiID)) {//(!isset($_SESSION['userId'])) {
+  } else if (checkSession($conn, $apiID)) {//(!isset($_SESSION['userId'])) {
   //   $headerContent->sessionValid = false;
   //   $headerContent->redirect = '/HIT238_A2/';
   // } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
@@ -56,15 +55,14 @@ class NavButton {
     require './dbh.inc.php';
     $userPerm = 0;
 
-    $sql = "SELECT uidusers FROM sysusers WHERE uidUsers=? AND perms=1";
+    $sql = "SELECT uidusers FROM sysusers WHERE sessionID=? AND perms=1";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         $headerContent->sessionValid = true;
         $headerContent->disError = 'err002';
     }
     else {
-      $userName = $_SESSION['userUid'];
-      mysqli_stmt_bind_param($stmt, "s", $userName);
+      mysqli_stmt_bind_param($stmt, "s", $_JSONdata['apiID']);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_store_result($stmt);
       $resultCheck = mysqli_stmt_num_rows($stmt);
@@ -80,7 +78,7 @@ class NavButton {
       $userPage->destination = '/HIT238_A2/users';
       array_push($headerContent->extraNav, $userPage);
     }
-
+    
     $headerContent->sessionValid = true;
     $headerContent->redirect = '/HIT238_A2/control';
   }
