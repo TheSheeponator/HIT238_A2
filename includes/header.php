@@ -17,6 +17,7 @@ class NavButton {
   Some code from: https://stackoverflow.com/questions/8719276/cross-origin-request-headerscors-with-php-headers
 */
   header('Access-Control-Allow-Origin: https://thesheeponator.github.io');
+  header('Access-Control-Allow-Origin: http://localhost');
   header('Access-Control-Allow-Credentials: true');
   header('Access-Control-Max-Age: 86400');    // cache for 1 day
   if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -28,22 +29,29 @@ class NavButton {
       header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
     exit();
   }
-  ini_set('session.cookie_samesite', 'None');
-  session_start();
+  // ini_set('session.cookie_samesite', 'None');
+  // session_start();
 
   $headerContent = new Header();
 
-  if (!isset($_SESSION['userId'])) {
+  $_JSONdata = json_decode(file_get_contents('php://input'), true);
+  require './session.php';
+  require './dbh.inc.php';
+
+  if (!isset($_JSONdata['apiID'])) {
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/HIT238_A2/';
-  } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
-    session_unset();
-    session_destroy();
+  } else if (!checkSession($conn, $apiID)) {//(!isset($_SESSION['userId'])) {
+  //   $headerContent->sessionValid = false;
+  //   $headerContent->redirect = '/HIT238_A2/';
+  // } else if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 900)) {
+  //   session_unset();
+  //   session_destroy();
 
     $headerContent->sessionValid = false;
     $headerContent->redirect = '/HIT238_A2/index?error=sessionexpired';
   } else {
-    $_SESSION['LAST_ACTIVITY'] = time();
+    // $_SESSION['LAST_ACTIVITY'] = time();
 
     require './dbh.inc.php';
     $userPerm = 0;
