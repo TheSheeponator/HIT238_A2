@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // Setup Service Worker
   if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/HIT238_A2s/sw.js').then(function(registration) {
+      navigator.serviceWorker.register('/HIT238_A2/sw.js').then(function(registration) {
         // Registration was successful
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
       }, function(err) {
