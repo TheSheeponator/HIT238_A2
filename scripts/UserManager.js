@@ -104,7 +104,6 @@ $(document).ready(function () {
             credentials: 'include',
             headers: {
                 'Content-Type': 'json',
-
             },
             body: JSON.stringify({
                 apiID: sessionStorage.getItem('apiID'),

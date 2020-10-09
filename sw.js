@@ -2,25 +2,25 @@
     Created by Sean Hume - s320298
 */
 
-importScripts('/scripts/StatusIDB.js');
+importScripts('/HIT238_A2/scripts/StatusIDB.js');
 // set variables.
 var CACHE_TITLE = 'SprinklerSites';
 var CACHE_VERSION = 'v0.0.66';
 var CACHE_NAME = CACHE_TITLE + '-' + CACHE_VERSION;
 var urlsToCache = [
 
-  '/css/style.css',
-  '/control',
-  '/scripts/control.js',
-  '/scripts/jquery.js',
-  '/errordocs/err001',
-  '/errordocs/err002',
-  '/errordocs/err003',
-  '/img/logo1.png',
-  '/scripts/jquery.imagemapster.min.js',
-  '/scripts/dataManager.js',
-  '/scripts/StatusIDB.js',
-  '/img/House%20Plan.png'
+  '/HIT238_A2/css/style.css',
+  '/HIT238_A2/control',
+  '/HIT238_A2/scripts/control.js',
+  '/HIT238_A2/scripts/jquery.js',
+  '/HIT238_A2/errordocs/err001',
+  '/HIT238_A2/errordocs/err002',
+  '/HIT238_A2/errordocs/err003',
+  '/HIT238_A2/img/logo1.png',
+  '/HIT238_A2/scripts/jquery.imagemapster.min.js',
+  '/HIT238_A2/scripts/dataManager.js',
+  '/HIT238_A2/scripts/StatusIDB.js',
+  '/HIT238_A2/img/House%20Plan.png'
 ];
 
 var POST_db;
