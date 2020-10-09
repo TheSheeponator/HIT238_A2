@@ -56,7 +56,7 @@ if (isset($_JSONdata['user'])) {
 
     $user = $_JSONdata['user'];
 
-    $sql = "DELETE FROM `sysUsers` WHERE `uidUsers`=?";
+    $sql = "DELETE FROM `sysusers` WHERE `uidUsers`=?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo json_encode(array("error" => "internal"));
