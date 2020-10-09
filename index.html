@@ -11,7 +11,7 @@
 <body>
     <main>
         <div class="login">
-            <form id="loginForm" method="POST" action="https://320298.spinetail.cdu.edu.au/API/login.inc">
+            <form id="loginForm">
                 <p class="title">LogIn</p>
 
                 <span id="error"></span>
@@ -39,18 +39,18 @@
                 else if (data.disError != '') { responseHandler({ 'error': 'internalerror' }); }
             }
         })
-    // $('#loginForm').submit(function(evt) {
-    //     evt.preventDefault(); //Prevent default form submittion
+    $('#loginForm').submit(function(evt) {
+        evt.preventDefault(); //Prevent default form submittion
 
-    //     var posting = $.post('https://320298.spinetail.cdu.edu.au/API/login.inc.php', {
-    //         uid: $('#uid').val(),
-    //         pwd: $('#pwd').val(),
-    //         loginsubmit: true
-    //     }, responseHandler, 'json')
-    //         .fail(function(data) {
-    //             console.log("Error", data);
-    //         });
-    // });
+        var posting = $.post('https://320298.spinetail.cdu.edu.au/API/login.inc.php', {
+            uid: $('#uid').val(),
+            pwd: $('#pwd').val(),
+            loginsubmit: true
+        }, responseHandler, 'json')
+            .fail(function(data) {
+                console.log("Error", data);
+            });
+    });
     function responseHandler(data) {
         if (data.error !== undefined) {
             if (data.error == "emptyfields") {
@@ -62,26 +62,27 @@
             } else {
                 $('#error').html("Sorry, an error occurred. Try again later.");
             }
-        } else if (data.success !== undefined) {
+        } else if (data.success !== undefined && data.apiID != undefined) {
+            sessionStorage.setItem('apiID', data.apiID);
             window.location = data.success;
         }
     };
-    $(document).ready(function () {
-        var GET = {}
-        location.search.substr(1).split("&").forEach(function(item) {GET[item.split("=")[0]] = item.split("=")[1]})
-        if (GET.error != undefined) {
-            if (GET.error == 'sessionexpired') {
-                $('#error').html("Your session has expired.<br>Please re-enter your credentials.");
-            } else if (GET.error == 'emptyfields') {
-                $('#error').html("Please enter a<br>Username and Password.");
-            } else if (GET.error == 'internalerror') {
-                $('#error').html("Sorry, this service is currently unavailable.<br>We're trying our hardest to fix it. Please try again later.");
-            } else if (GET.error == "incorrectcredentials") {
-                $('#error').html("Please enter valid credentials.");
-            } else {
-                $('#error').html("Sorry, an error occurred. Try again later.");
-            }
-        }
-    });
+    // $(document).ready(function () {
+    //     var GET = {}
+    //     location.search.substr(1).split("&").forEach(function(item) {GET[item.split("=")[0]] = item.split("=")[1]})
+    //     if (GET.error != undefined) {
+    //         if (GET.error == 'sessionexpired') {
+    //             $('#error').html("Your session has expired.<br>Please re-enter your credentials.");
+    //         } else if (GET.error == 'emptyfields') {
+    //             $('#error').html("Please enter a<br>Username and Password.");
+    //         } else if (GET.error == 'internalerror') {
+    //             $('#error').html("Sorry, this service is currently unavailable.<br>We're trying our hardest to fix it. Please try again later.");
+    //         } else if (GET.error == "incorrectcredentials") {
+    //             $('#error').html("Please enter valid credentials.");
+    //         } else {
+    //             $('#error').html("Sorry, an error occurred. Try again later.");
+    //         }
+    //     }
+    // });
 </script>
 </html>
