@@ -80,7 +80,7 @@ if (isset($_JSONdata['adduser'])) {
     }
     else {
         
-        $sql = "SELECT uidUsers FROM sysUsers WHERE uidUsers=?";
+        $sql = "SELECT uidUsers FROM sysusers WHERE uidUsers=?";
         $stmt = mysqli_stmt_init($conn);
 
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -98,7 +98,7 @@ if (isset($_JSONdata['adduser'])) {
             }
             else {
 
-                $sql = "INSERT INTO sysUsers (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO sysusers (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     echo json_encode(array("error" => "internal"));
