@@ -97,7 +97,7 @@ $(document).ready(function () {
 
         form = document.getElementById('addUserForm');
 
-        fetch('https://320298.spinetail.cdu.edu.au/API/addUser.inc', {
+        fetch('https://320298.spinetail.cdu.edu.au/API/adduser.inc', {
             method: 'POST',
             cache: 'no-cache',
             mode: 'cors',
