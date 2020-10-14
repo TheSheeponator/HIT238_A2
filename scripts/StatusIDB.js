@@ -95,30 +95,6 @@ function updateStatusData() {
                   StatusIDBSettings.tables[0].tableName,
                   result.zoneStatus[i].data,
                   result.zoneStatus[i].id
-
-                  // Change Colour of map area
-                  );
-                  switch (result.zoneStatus[i].data.status) {
-                    case '0':
-                      colour = '29cdff';
-                      break;
-                    case '1':
-                      colour = '4CAF50';
-                      break;
-                    case '2':
-                      colour = 'e60000';
-                      break;
-                    case '3':
-                      colour = '006600';
-                      break;
-                    case '4':
-                      colour = 'ff9933';
-                      break;
-                    default:
-                      colour = '808080';
-                      break;
-                  }
-                  $('#controlImg').mapster('set',true,'#FL'/*+data.zoneStatus[i].id*/, {stroke: false, fillOpacity : 0.5, fillColor: colour} );
               }
               if (result.zoneStatus.length > 0) {
                 var date = new Date();
