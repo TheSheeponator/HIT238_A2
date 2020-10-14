@@ -67,6 +67,16 @@ class users {
 }
 
 require './dbh.inc.php';
+require './session.php';
+$_JSONdata = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($_JSONdata['apiID'])) {
+    echo json_encode(array("error" => "invCredentials"));
+    exit();
+} else if (!checkPerm($conn, $_JSONdata['apiID'])) {
+    echo json_encode(array("error" => "invCredentials"));
+    exit();
+}
 
 $sql = 'SELECT `uidUsers`,`emailUsers`,`Perms` FROM `sysusers`';
 $stmt = mysqli_stmt_init($conn);
