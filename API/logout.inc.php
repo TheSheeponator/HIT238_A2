@@ -20,4 +20,4 @@ session_start();
 session_start();
 session_unset();
 session_destroy();
-header("Location: /index");
+header("Location: https://thesheeponator.github.io/HIT238_A2/");
