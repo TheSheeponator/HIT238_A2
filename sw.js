@@ -5,7 +5,7 @@
 importScripts('/HIT238_A2/scripts/StatusIDB.js');
 // set variables.
 var CACHE_TITLE = 'SprinklerSites';
-var CACHE_VERSION = 'v0.0.66';
+var CACHE_VERSION = 'v0.0.67';
 var CACHE_NAME = CACHE_TITLE + '-' + CACHE_VERSION;
 var urlsToCache = [
 
