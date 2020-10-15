@@ -515,10 +515,10 @@ function setTimeValues() {
                 start[1] = start[1].split(' ')[0];
                 finish[1] = finish[1].split(' ')[0];
 
-                if (start[2] == 'pm') {
+                if (start[2] == 'pm' && start[0] != '12') {
                     start[0] = parseInt(start[0], 10) + 12;
                 }
-                if (finish[2] == 'pm') {
+                if (finish[2] == 'pm' && finish[0] != '12') {
                     finish[0] = parseInt(finish[0], 10) + 12;
                 }
                 var startTime = start[0] + ':' + start[1];
