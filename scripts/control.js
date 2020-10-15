@@ -131,10 +131,10 @@ function timeDiff(start, end, twelveHour = false) {
         start[1] = start[1].split(' ')[0];
         end[1] = end[1].split(' ')[0];
 
-        if (startMeridian.toLowerCase() == 'pm') {
+        if (startMeridian.toLowerCase() == 'pm' && start[0] != '12') {
             start[0] = Number(start[0]) + 12;
         } 
-        if (endMeridian.toLowerCase() == 'pm') {
+        if (endMeridian.toLowerCase() == 'pm' && end[0] != '12') {
             end[0] = Number(end[0]) + 12;
         }  
     }
