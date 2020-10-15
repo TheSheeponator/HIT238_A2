@@ -56,6 +56,7 @@ table.Utable td:nth-child(1) {
 }
 table.Utable tbody tr td:nth-child(2) {
     overflow: hidden;
+    max-width: 150px;
 }
 
 
