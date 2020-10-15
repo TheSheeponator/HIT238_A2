@@ -342,14 +342,20 @@ $('#editForm').on('submit', (e) => {
         navigator.serviceWorker.controller.postMessage(msg);
     } else { console.log("Service Worker Control is not instantiated!"); }
 
-    // Ajax request to server for form submission.
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        url: "https://320298.spinetail.cdu.edu.au/API/comm/changeSettings",
-        data: JSON.stringify(postdata),
-        success: (response) => {
+    url = "https://320298.spinetail.cdu.edu.au/API/comm/changeSettings";
+    content = JSON.stringify(postdata);
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: content,
+        mode: 'cors',
+        credentials: 'include'
+    })
+        .then(response => response.json())
+        .then(response => {
             // if successful, check if the response is not null.
             if (response != undefined) {
                 // Check response values and act accordingly tos server response.
@@ -388,13 +394,65 @@ $('#editForm').on('submit', (e) => {
                     displayMessage(0, 'An unknown error occurred, your change was not saved. Please try again later.');
                 }
             }
-            
-        },
-        error: (err) => {
+        })
+        .catch(err => {
             $('.popupContainer').hide();
             displayMessage(0, 'An unknown error occurred, your change was not saved. Please try again later.');
-        }
-    });
+        })
+
+    // Ajax request to server for form submission.
+    // $.ajax({
+    //     type: "POST",
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json",
+    //     url: "https://320298.spinetail.cdu.edu.au/API/comm/changeSettings",
+    //     data: JSON.stringify(postdata),
+    //     success: (response) => {
+    //         // if successful, check if the response is not null.
+    //         if (response != undefined) {
+    //             // Check response values and act accordingly tos server response.
+    //             if (response.success != undefined) {
+    //                // clear the data there to stop user from seeing it change. ===================== MIGHT NOT NEED
+    //                 editInputClear();
+    //                 // hide the popup, and display a success message.
+    //                 $('.popupContainer').hide();
+    //                 displayMessage(1, 'Successfully Updated Database!');
+
+    //                 updateStatusData();
+    //                 // update the displayed information.
+    //                 mapClick(CurrentSelection, false);
+
+    //             } else if (response.error != undefined && response.error == 'invalid') {
+    //                 // invalid can also have detailed info on error.
+    //                 if (response.error != undefined && response.loc != undefined && response.col != undefined) {
+    //                     $('.popupContainer').hide();
+    //                     displayMessage(0, `Invalid Request, for '${response.col}'. Please try again.`);
+    //                 } else {
+    //                     $('.popupContainer').hide();
+    //                     displayMessage(0, 'Invalid Request, your change was not saved. Please try again.');
+    //                 }
+    //             } else if (response.error != undefined && response.error == 'internal') {
+    //                 $('.popupContainer').hide();
+    //                 displayMessage(0, 'An internal error occurred and your change was not saved. Please try again later.');
+    //             } else if (response.connError != undefined) {
+    //                 $('.popupContainer').hide();
+    //                 displayMessage(2, 'Request could not be sent right now and will be sent later when reconnected to the internet.');
+    //                 resetData();
+    //             } else if (response.redirect != undefined) {
+    //                 $('.popupContainer').hide();
+    //                 displayMessage(2, 'Session token is invalid, Please log in again <a href="//">here</a>.');
+    //             } else {
+    //                 $('.popupContainer').hide();
+    //                 displayMessage(0, 'An unknown error occurred, your change was not saved. Please try again later.');
+    //             }
+    //         }
+            
+    //     },
+    //     error: (err) => {
+    //         $('.popupContainer').hide();
+    //         displayMessage(0, 'An unknown error occurred, your change was not saved. Please try again later.');
+    //     }
+    // });
 });
 
 function displayMessage(colour, message) {
