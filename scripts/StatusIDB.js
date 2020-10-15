@@ -95,6 +95,7 @@ function updateStatusData() {
                   StatusIDBSettings.tables[0].tableName,
                   result.zoneStatus[i].data,
                   result.zoneStatus[i].id
+                );
               }
               if (result.zoneStatus.length > 0) {
                 var date = new Date();
