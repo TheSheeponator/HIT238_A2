@@ -301,13 +301,11 @@ $('#editForm').on('submit', (e) => {
     // initialises values
     startVal = $('#startTimeINP')[0].value;
     finishVal = $('#finishTimeINP')[0].value;
-    delayVal = $('#delay')[0].value;
     // Sets message and post data.
     var postdata = {
         loc: CurrentSelection,
         staTime: startVal,
         finTime: finishVal,
-        delay: delayVal
     }
     //Preps and sends the data to the service worker.
     var msg = {
@@ -315,7 +313,6 @@ $('#editForm').on('submit', (e) => {
             loc: CurrentSelection,
             staTime: startVal,
             finTime: finishVal,
-            delay: delayVal
         }
     }
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
