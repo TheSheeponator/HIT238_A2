@@ -10,7 +10,7 @@ function resetData() {
     // Resets the displayed data on edit. Called by Manual and Auto button events.
     // Calls the same function as the image, to 'refresh' the data.
     updateStatusData();
-    mapClick(CurrentSelection);
+    mapClick(CurrentSelection, false);
 }
 
 function setEditButton(Value) {
